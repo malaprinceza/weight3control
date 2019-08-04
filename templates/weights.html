@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <table>
+      <tr>
+        <th> Date </th>
+        <th> Weight </th>
+      </tr>
+      {% for date, weight in weight_date %}
+      <tr>
+        <td> {{ date }} </td>
+        <td> {{ weight }} kg </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <p> YOU ARE MAKING A PROGRESS! :)) </p>
+
+{% endblock %}

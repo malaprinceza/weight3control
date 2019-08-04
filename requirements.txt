@@ -1,0 +1,9 @@
+Click==7.0
+Flask==1.1.1
+itsdangerous==1.1.0
+Jinja2==2.10.1
+MarkupSafe==1.1.1
+pg8000==1.13.2
+psycopg2==2.8.3
+scramp==1.1.0
+Werkzeug==0.15.5

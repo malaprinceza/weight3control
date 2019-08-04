@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<p>
+<form action="/signup" method="post">
+  <label for="date">Date</label>
+  <br><input type="date" id="date" name="date"><br> 
+  <label for="weight">Weight</label>
+  <br><input type="text" id="weight" name="weight" ></br>
+  <input type="submit" class="button" value="Add">
+</form>
+</p>
+{% endblock %}
+
