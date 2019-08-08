@@ -42,7 +42,7 @@ input[type= text] {
   border: 2px color: #92a8d1;
   border-radius: 4px;
 }
-input[type=date], [type= text], input[type=number] {
+input[type=date], input[type=number], [type=password] {
   width: 50%;
   padding: 10px 20px;
   margin: 8px 0;
@@ -81,14 +81,20 @@ tr:nth-child(even) {background-color: #f2f2f2;}
     <a href="/">Home</a>
     <a href="/weights.html">History</a>
     <a href="/graph">Chart</a>
+<!--    <a href="/register">Sign up</a>-->
     {% if username %}
         <a href="/logout">Log out</a>
     {% endif %}
 </div>
 <div>
 <p>
-{% block content %} {% endblock %}
+        {% for message in get_flashed_messages() %}
+    <h3> {{ message }} </h3>
+      {% endfor %}
 </p>
+
+{% block content %} {% endblock %}
+      <!-- messages -->
 </div>
 </body>
 </html>
