@@ -1,3 +1,7 @@
 virtual
 app.yaml
 .gcloudignore
+models.py
+create_users.py
+appengine_config.py
+*.pyc

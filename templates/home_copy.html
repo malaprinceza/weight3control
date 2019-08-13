@@ -4,11 +4,13 @@
 {% block content %}
 <p>
 <form action="/submit" method="post">
+<!--  <label for="goal_weight">Goal weight</label>-->
+<!--  <br><input type="number" id = "goal_weight" name="goal_weight" min="30" max="299" value="request.form.goal_weight" step=".01"><br>-->
   <label for="date">Date</label>
   <br><input type="date" id="date" name="date"><br> 
   <label for="weight">Weight</label>
-  <br><input type="text" id="weight" name="weight" ></br>
-  <input type="submit" class="button" value="Add">
+  <br><input type="number" id = "weight" name="weight" min="30" max="299" value="request.form.weight" step=".01">
+  <br><input type="submit" class="button" value="Add">
 </form>
 </p>
 {% endblock %}

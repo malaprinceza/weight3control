@@ -4,8 +4,9 @@ import json
 from datetime import timedelta
 from flask_bcrypt import Bcrypt
 
-app = Flask(__name__)
+import codecs
 
+app = Flask(__name__)
 
 app.secret_key = '28ANsjwesjCigaXHJNfY6-AS4GglnRkkEFz88uqkMzs'
 bcrypt = Bcrypt(app)
@@ -66,13 +67,12 @@ def submit():
     weight = request.form['weight']
     date = request.form['date']
     try:
-
-        if len(weight) > 1 and len(date) == 10:
-            g.c.execute('INSERT INTO dates (date, weight, user_id) VALUES (%s, %s, (SELECT id FROM users WHERE username = %s))', (date, weight, username))
-        else:
-            flash('Please enter your real weight!')
+        # if len(weight) > 1 and len(date) == 10:
+        g.c.execute('INSERT INTO dates (date, weight, user_id) VALUES (%s, %s, (SELECT id FROM users WHERE username = %s))', (date, weight, username))
+        # else:
+        #     flash('Please enter your real weight!')
     except:
-        flash('Plese enter your real weight!')
+        flash('Enter weight and date!')
     return redirect('/')
 
 
@@ -124,11 +124,20 @@ def login():
         username = request.form['username']
         password = request.form['password']
         try:
-            g.c.execute('SELECT id FROM users WHERE username = %s AND password = %s', (username, password))
-            g.c.fetchone()[0]
-            session['username'] = username
-            return redirect('/')
-        except:
+            g.c.execute('SELECT password FROM users WHERE username = %s', (username,))
+            hashsed_password = g.c.fetchone()[0][2:]
+            print(hashsed_password)
+            hashsed_password = codecs.decode(hashsed_password, "hex").decode('utf-8')
+            print(hashsed_password)
+            print(password)
+            if bcrypt.check_password_hash(hashsed_password, password):
+                session['username'] = username
+                return redirect('/')
+            else:
+                flash('Not a valid username or password')
+                return redirect('/login')
+        except Exception as e:
+            print(e)
             flash('Not a valid username or password')
             return redirect('/login')
 
